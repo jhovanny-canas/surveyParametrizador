@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3678641178">
+    <data-source source="LOCAL" name="Django default" uuid="93c74f63-d954-4737-a97a-61dc625d3305">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://:5432/bdencuestas</jdbc-url>
+      <user-name>postgres</user-name>
+      <user-password>dfc0dfc2dfc5dfdcdfcbdfc4dfc4dfd3</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h2>Nueva encuesta</h2>
+
+<form action="" method="post" enctype="application/x-www-form-urlencoded">
+
+    {% csrf_token %}
+
+    <label for="nameencuesta">Nombre de la encuesta</label>
+    <input type="text" name="nameencuesta"> </input>
+
+    <label for="descripcion">Descripcion</label>
+    <input type="text" name="descripcion"/>
+    {% if error_form %}
+    <p>{{ error_form }}</p>
+    {% endif %}
+
+    <input type="submit" value="Crear"/>
+
+
+</form>
+
+
+</body>
+</html>

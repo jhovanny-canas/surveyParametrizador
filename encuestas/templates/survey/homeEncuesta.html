@@ -1,0 +1,53 @@
+{% include 'survey/base.html' %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% if encuesta %}
+<h1>Felicitaciones se ha creado la encuesta {{ encuesta.nombre }} </h1>
+<p>{{ encuesta.descripcion }}</p>
+
+    <form method="POST" action="{% url 'encuestas:survey_setup_addquestion' encuesta.id %}" name="formquestion" >
+
+    {% csrf_token %}
+
+        <select name="typeQuestion" id="typeQuestion">
+            <option value="1">Texto</option>
+            <option value="2">Numero</option>
+            <option value="3">Radio</option>
+            <option value="4">Seleccion</option>
+            <option value="5">Fecha</option>
+            <option value="6">Canvas</option>
+            <option value="7">Foto</option>
+            <option value="8">Audio</option>
+
+        </select>
+
+
+        <input type="submit" value="Agregar pregunta" name="agregarpregunta"/>
+
+
+
+    {% if preguntas %}
+    <div id="contenedor">
+    {% for pregunta in preguntas %}
+        <div id="{{ forloop.counter }}">
+        <p><strong>#{{ pregunta.numeroPregunta }}</strong>.{{ pregunta.label }}</p> <a href="{% url 'encuestas:survey_setup_delquestion' encuesta.id pregunta.id %}">Eliminar pregunta</a>
+        --<a href="{% url 'encuestas:survey_setup_editquestion' encuesta.id pregunta.id %}">Editar pregunta</a>
+        </div>
+    {% endfor %}
+
+    </div>
+ </form>
+
+    {% endif %}
+
+
+{% else %}
+   <p>No existe ninguna encuesta</p>
+{% endif %}
+</body>
+</html>

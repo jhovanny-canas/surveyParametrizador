@@ -1,0 +1,15 @@
+{% extends 'survey/basequestion.html' %}
+{% block title %} Pregunta de multiple opcion {% endblock %}
+{% block lblPreg %} {{ configuracion }} -- Multiple opcion {% endblock %}
+{% block form %} <input type="hidden" value="4" name="typequestion" id="typequestion"/>
+<input name="idquestion" id="idquestion" value="{{ consecutivo }}" type="hidden"/>
+<input name="typeVariable" value="1" type="hidden"/>
+<div id="div-opciones">
+
+
+</div>
+<div id="new-opcion">
+    <label for="txtnewopcion">Ingrese la respuesta</label>
+    <input type="text" id="txtnewopcion" name="txtnewopcion" id="txtnewopcion"/> <input type="button" class="addopcion" id="addopcion" value="agregar opcion"/>
+</div>
+{% endblock %}

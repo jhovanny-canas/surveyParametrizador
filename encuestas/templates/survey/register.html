@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    {% include 'survey/base.html' %}
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+    <body>
+        {% if registered %}
+          <strong>Thank you for registering!</strong>
+          <a href="/login/">Return to the homepage.</a><br />
+        
+        {% else %}
+          <div class='container text-center'>
+              <h2 class="form-signin-heading">Sign Up</h2>
+              <br>
+              <form class="form-horizontal" id="user_form" method="post" action="/register/"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+      {% comment %}          <table> {% endcomment %}
+                    {{ user_form.as_p }}
+
+{% comment %}                  <tr>
+                     
+                      <td class="container text-center">{{ user_form.username }}</td>
+                  </tr>
+
+                  <tr>
+                     
+                      <td class="container text-center">{{ user_form.email }}</td>
+                  </tr>
+
+                  <tr>
+                     
+                      <td class="container text-center">{{ user_form.password }}</td>
+                  </tr>{% endcomment %}
+         {% comment %}       </table>  {% endcomment %}
+
+
+                <button class="btn btn-lg btn-primary" type="submit">Register</button>
+                <input type="hidden" name="submit" value="Register" />
+              </form>
+            </div>
+          {% endif %}
+    </body>
+</html>

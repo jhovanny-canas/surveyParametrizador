@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+
+    {% csrf_token %}
+
+    ¿Esta seguro de eliminar la pregunta {{ pregunta.numeroPregunta }} ?
+
+    <input type="submit" name="eliminar" value="Eliminar pregunta"/>
+    <a href="#" onclick="window.history.back(); return false;" >No, cancelar </a>
+
+</form>
+</body>
+</html>

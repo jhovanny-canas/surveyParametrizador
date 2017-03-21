@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+{% include 'survey/base.html' %}
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static  "css/bootstrap.min.css" %}"/>
+
+    <title> {% block title %} {% endblock %}</title>
+</head>
+<body>
+    <p id="lblPreg">Pregunta # {% block lblPreg %} {% endblock %}</p>
+            <form method="post" name="formtext" enctype="application/x-www-form-urlencoded">
+            {% csrf_token %}
+            {% comment %} colocar el tipo de formulario <input type="hidden" value="1" name="typequestion"/> {% endcomment %}
+                    <label for="txtPregunta">Pregunta</label>
+                    <input class="form-control" type="text" name="txtPregunta" placeholder="Ingrese el texto de la pregunta aqui" value="{{ pregunta.label }}"/>
+                    <br/>
+                    <label for="txtrecomendaciones">Recomendaciones</label>
+                    <input class="form-control" type="text" name="txtrecomendaciones" placeholder="Ingrese las recomendaciones de la pregunta" value="{{ pregunta.textAyuda }}" />
+                    <br/>
+                    <label for="txtnumeropregunta">Numero pregunta</label>
+                    <input class="form-control" type="text" name="txtnumeropregunta" placeholder="Opcional, ingrese el numero de la pregunta" value="{{ pregunta.numeroPregunta }}" />
+                    <br/>
+            <input type="hidden"  name="typequestion" value="{{ pregunta.tipoPregunta }}"/>
+            <input name="typeVariable"  type="hidden" value="{{ pregunta.tipovariable.id }}"/>
+
+            {% if pregunta.tipoPregunta.id <= 2 %}
+                 <div id="div-values">
+                    <label  for="minvalue">valor minimo</label>
+                    <input type="text" name="minvalue" id="minvalue" pattern="[0-9]+" value="{{ pregunta.minvalue|default:"" }}" required/>
+                    <label for="maxvalue">valor maximo</label>
+                    <input type="text" name="maxvalue" id="maxvalue" pattern="[0-9]+" value="{{ pregunta.maxvalue|default:"" }}" required/>
+                    </div>
+            {% endif %}
+                    <br/>
+
+                {% if valores %}
+                    <div id="div-opciones">
+                    <ul>
+                    {% for respuesta in valores %}
+
+                        <li>{{  respuesta.descripcion_valor }} -- {{ respuesta.valor_id }}  </li>
+                        <input type="button" id='{{ respuesta.id }}' class="eliminarop" value="eliminar"/></li>'
+                    {% endfor %}
+                    </ul>
+
+                    </div>
+                    <div id="new-opcion">
+                        <label for="txtnewopcion">Ingrese la respuesta</label>
+                        <input type="text" id="txtnewopcion" name="txtnewopcion" id="txtnewopcion"/> <input type="button" class="addopcion" id="addopcion" value="agregar opcion"/>
+                    </div>
+                {% endif %}
+                    <a href="#" onclick="window.history.back(); return false;" >No, cancelar </a>
+                    <input class="btn btn-primary"  type="submit" name="agregar" value="Editar pregunta"/>
+
+            </form>
+
+<script src="{% static "js/jquery-3.0.0.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %} "></script>
+<script src="{% static "js/main.js" %}"></script>
+</body>
+</html>

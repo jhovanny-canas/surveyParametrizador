@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% include 'survey/base.html' %}
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Encuestas disponibles</h1>
+
+{% if encuestas %}
+
+    {% for encuesta in encuestas %}
+
+       Agregar preguntas  <a href="{% url 'encuestas:survey_setup' encuesta.id %}">{{ encuesta.nombre }}</a>
+     <!--   <a href="configurar/{{ encuesta.id }}">{{ encuesta.nombre }}</a> -->
+        <a href="{% url 'encuestas:survey_delete' encuesta.id %}">Eliminar encuesta</a>
+        <br/>
+
+    {% endfor %}
+
+{% endif %}
+
+</body>
+</html>

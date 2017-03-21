@@ -1,0 +1,43 @@
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static  "css/bootstrap.min.css" %}"/>
+    <title> {% block title %} {% endblock %}</title>
+</head>
+<body>
+    <p id="lblPreg">Pregunta # {% block lblPreg %} {% endblock %}</p>
+            <form method="post" name="formtext" enctype="application/x-www-form-urlencoded">
+            {% csrf_token %}
+            {% comment %} colocar el tipo de formulario <input type="hidden" value="1" name="typequestion"/> {% endcomment %}
+                    <label for="txtPregunta">Pregunta</label>
+                    <input class="form-control" type="text" name="txtPregunta" placeholder="Ingrese el texto de la pregunta aqui"/>
+                    <br/>
+                    <label for="txtrecomendaciones">Recomendaciones</label>
+                    <input class="form-control" type="text" name="txtrecomendaciones" placeholder="Ingrese las recomendaciones de la pregunta" />
+                    <br/>
+                    <label for="txtnumeropregunta">Numero pregunta</label>
+                    <input class="form-control" type="text" name="txtnumeropregunta" placeholder="Opcional, ingrese el numero de la pregunta" />
+                    <br/>
+                <div id="div-values">
+                    <label  for="minvalue">valor minimo</label>
+                    <input type="text" name="minvalue" id="minvalue" pattern="[0-9]+" required/>
+                    <label for="maxvalue">valor maximo</label>
+                    <input type="text" name="maxvalue" id="maxvalue" pattern="[0-9]+" required/>
+                </div>
+                    <br/>
+
+                    {% block form %}
+
+                    {% endblock %}
+                    <input class="btn btn-primary"  type="submit" id="cancel" name="cancel" value="cancelar"/>
+                    <input class="btn btn-primary"  type="submit" name="agregar" value="agregar pregunta"/>
+
+            </form>
+<script src="{% static "js/jquery-3.0.0.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %} "></script>
+<script src="{% static "js/main.js" %}"></script>
+</body>
+</html>

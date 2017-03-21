@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h3>Preguntas</h3>
+
+
+<form  id="frmadvance"  enctype="application/x-www-form-urlencoded">
+{%  csrf_token %}
+{% if preguntas %}
+        <input type="hidden" value="{{ id_encuesta }}" id="encuesta"/>
+{% for pregunta in  preguntas %}
+                <div class="logicaEncabezado" data-idpreg="pregunta[{{ pregunta.numeroPregunta }}].logica"  data-number-preg="{{ pregunta.id }}">
+                     <div >
+                         <p># {{ pregunta.numeroPregunta }} <input type="hidden" name="pregunta[{{ pregunta.numeroPregunta }}].actual" value="{{ pregunta.id }}"/></p>
+                     </div>
+
+                    <div class="logicaPreg" >
+                        <textarea name="txtlogica" class="txtlogica" cols="30" rows="10" required></textarea>
+                         <div class="parametroslogica">
+                             <input type="button" value="pase" class="pase"/>
+                             <input type="button" value="Si" class="si"/>
+                             <input type="button" value="Si-entonces" class="sino"/>
+                             <input type="button" value="Cargar variables" class="cargar"/>
+                             <input type="button" value="Ocultar" class="ocultar"/>
+                             <input type="button" value="Si && Si" class="sisi"/>
+                             <input type="button" value="Mensaje" class="mensaje"/>
+                             <input type="button" value="Alerta" class="alerta"/>
+                             <input type="button" value="unica" class="unica"/>
+                             <input type="button" value="si seleccion" class="siselect"/>
+                         </div>
+
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+{% endif %}
+    <input type="submit" id="enviar" value="enviar"/>
+</form>
+
+<script src="{% static "js/jquery-3.0.0.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %} "></script>
+<script src="{% static "js/flow.js" %}"></script>
+</body>
+</html>

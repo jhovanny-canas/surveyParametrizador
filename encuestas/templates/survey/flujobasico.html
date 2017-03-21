@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h3>Preguntas</h3>
+
+
+<form action="" method="post" enctype="application/x-www-form-urlencoded">
+{%  csrf_token %}
+{% if preguntas %}
+{% for pregunta in  preguntas %}
+            {% if forloop.last %}
+   <div>
+     <p># {{ pregunta.numeroPregunta }} <input type="hidden" name="pregunta[{{ pregunta.numeroPregunta }}].actual" value="{{ pregunta.id }}"/></p>
+                <select name="pregunta[{{ pregunta.numeroPregunta }}].preguntadestino" >
+                            <option value="{{ pregunta.id }}"> {{ pregunta.numeroPregunta }}</option>
+                </select>
+   </div>
+        {% else %}
+
+                <div class="logicaEncabezado">
+                     <div >
+                         <p># {{ pregunta.numeroPregunta }} <input type="hidden" name="pregunta[{{ pregunta.numeroPregunta }}].actual" value="{{ pregunta.id }}"/></p>
+
+                         <select name="pregunta[{{ pregunta.numeroPregunta }}].preguntadestino" >
+                             {% spaceless %}
+                                            {% for preg in  preguntas%}
+                                                {%  if preg.numeroPregunta > pregunta.numeroPregunta %}
+                                                    <option value="{{ preg.id }}"> {{ preg.numeroPregunta }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                              {% endspaceless %}
+                         </select>
+                     </div>
+
+                </div>
+    {% endif %}
+                {% endfor %}
+{% endif %}
+    <input type="submit" value="enviar"/>
+</form>
+
+<script src="{% static "js/jquery-3.0.0.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %} "></script>
+<script src="{% static "js/main.js" %}"></script>
+</body>
+</html>

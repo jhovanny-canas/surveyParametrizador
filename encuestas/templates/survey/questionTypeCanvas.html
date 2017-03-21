@@ -1,0 +1,7 @@
+{% extends 'survey/basequestion.html' %}
+{% block title %} Pregunta tipo canvas {% endblock %}
+{% block lblPreg %} {{ configuracion }} -- Canvas {% endblock %}
+{% block form %} <input type="hidden" value="6" name="typequestion" id="typequestion"/>
+    <input name="idquestion" value="{{ consecutivo }}" type="hidden"/>
+    <input name="typeVariable" value="2" type="hidden"/>
+{% endblock %}
